@@ -1,0 +1,314 @@
+{
+  "mode": "Local rules mode",
+  "findings": [
+    {
+      "requirement": {
+        "outcome": "E1",
+        "measurement": "HbA1c",
+        "visits": [
+          "Baseline",
+          "Week 24"
+        ],
+        "source": {
+          "file": "protocol.md",
+          "line": 6,
+          "text": "- E1 | HbA1c | Baseline; Week 24"
+        }
+      },
+      "sap": {
+        "file": "sap.md",
+        "line": 6,
+        "text": "- E1 | HbA1c | Baseline; Week 24"
+      },
+      "searches": [
+        {
+          "file": "crf_fields.csv",
+          "available": true,
+          "citation": {
+            "file": "crf_fields.csv",
+            "line": 1,
+            "text": "field_id,measurement,visit,participant_key"
+          },
+          "matched_rows": []
+        },
+        {
+          "file": "lab_feed.csv",
+          "available": true,
+          "citation": {
+            "file": "lab_feed.csv",
+            "line": 1,
+            "text": "field_id,measurement,visit,participant_key"
+          },
+          "matched_rows": [
+            {
+              "measurement": "Glycated hemoglobin",
+              "visit": "Baseline",
+              "field_id": "LAB_A1C_BL",
+              "participant_key": "participant_id",
+              "source": {
+                "file": "lab_feed.csv",
+                "line": 2,
+                "text": "LAB_A1C_BL | Glycated hemoglobin | Baseline | participant_id"
+              }
+            },
+            {
+              "measurement": "Hemoglobin A1c",
+              "visit": "Week 24",
+              "field_id": "LAB_A1C_W24",
+              "participant_key": "participant_id",
+              "source": {
+                "file": "lab_feed.csv",
+                "line": 3,
+                "text": "LAB_A1C_W24 | Hemoglobin A1c | W24 | participant_id"
+              }
+            }
+          ]
+        }
+      ],
+      "initial": "Provisionally add a CRF field for Baseline, Week 24 if no other source covers it.",
+      "final": "Withdraw the proposed CRF addition. The checked specifications cover all required visits.",
+      "status": "covered",
+      "missing_visits": []
+    },
+    {
+      "requirement": {
+        "outcome": "E2",
+        "measurement": "Fasting glucose",
+        "visits": [
+          "Week 24"
+        ],
+        "source": {
+          "file": "protocol.md",
+          "line": 7,
+          "text": "- E2 | Fasting glucose | Week 24"
+        }
+      },
+      "sap": {
+        "file": "sap.md",
+        "line": 7,
+        "text": "- E2 | Fasting glucose | Week 24"
+      },
+      "searches": [
+        {
+          "file": "crf_fields.csv",
+          "available": true,
+          "citation": {
+            "file": "crf_fields.csv",
+            "line": 1,
+            "text": "field_id,measurement,visit,participant_key"
+          },
+          "matched_rows": [
+            {
+              "measurement": "Fasting plasma glucose",
+              "visit": "Baseline",
+              "field_id": "FPG_BASE",
+              "participant_key": "participant_id",
+              "source": {
+                "file": "crf_fields.csv",
+                "line": 2,
+                "text": "FPG_BASE | Fasting plasma glucose | Baseline | participant_id"
+              }
+            }
+          ]
+        },
+        {
+          "file": "lab_feed.csv",
+          "available": true,
+          "citation": {
+            "file": "lab_feed.csv",
+            "line": 1,
+            "text": "field_id,measurement,visit,participant_key"
+          },
+          "matched_rows": []
+        }
+      ],
+      "initial": "Provisionally add a CRF field for Week 24 if no other source covers it.",
+      "final": "Confirm how Fasting glucose will be collected at Week 24.",
+      "status": "gap_in_supplied_specs",
+      "missing_visits": [
+        "Week 24"
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "outcome": "E1",
+      "actor": "controller",
+      "event": "read_requirement",
+      "protocol": {
+        "file": "protocol.md",
+        "line": 6,
+        "text": "- E1 | HbA1c | Baseline; Week 24"
+      },
+      "sap": {
+        "file": "sap.md",
+        "line": 6,
+        "text": "- E1 | HbA1c | Baseline; Week 24"
+      },
+      "aligned": true
+    },
+    {
+      "outcome": "E1",
+      "actor": "tool",
+      "event": "search_fields",
+      "file": "crf_fields.csv",
+      "available": true,
+      "citation": {
+        "file": "crf_fields.csv",
+        "line": 1,
+        "text": "field_id,measurement,visit,participant_key"
+      },
+      "matched_rows": []
+    },
+    {
+      "outcome": "E1",
+      "actor": "investigator",
+      "event": "initial_recommendation",
+      "detail": "Provisionally add a CRF field for Baseline, Week 24 if no other source covers it."
+    },
+    {
+      "outcome": "E1",
+      "actor": "investigator",
+      "event": "decision",
+      "action": "inspect_lab",
+      "reason": "The CRF leaves visits uncovered. Check the lab specification before adding a field."
+    },
+    {
+      "outcome": "E1",
+      "actor": "tool",
+      "event": "search_fields",
+      "file": "lab_feed.csv",
+      "available": true,
+      "citation": {
+        "file": "lab_feed.csv",
+        "line": 1,
+        "text": "field_id,measurement,visit,participant_key"
+      },
+      "matched_rows": [
+        {
+          "measurement": "Glycated hemoglobin",
+          "visit": "Baseline",
+          "field_id": "LAB_A1C_BL",
+          "participant_key": "participant_id",
+          "source": {
+            "file": "lab_feed.csv",
+            "line": 2,
+            "text": "LAB_A1C_BL | Glycated hemoglobin | Baseline | participant_id"
+          }
+        },
+        {
+          "measurement": "Hemoglobin A1c",
+          "visit": "Week 24",
+          "field_id": "LAB_A1C_W24",
+          "participant_key": "participant_id",
+          "source": {
+            "file": "lab_feed.csv",
+            "line": 3,
+            "text": "LAB_A1C_W24 | Hemoglobin A1c | W24 | participant_id"
+          }
+        }
+      ]
+    },
+    {
+      "outcome": "E1",
+      "actor": "reviewer",
+      "event": "verdict",
+      "round": 1,
+      "action": "accept",
+      "reason": "Submit the current evidence for the controller to verify."
+    },
+    {
+      "outcome": "E1",
+      "actor": "controller",
+      "event": "final_finding",
+      "status": "covered",
+      "missing_visits": [],
+      "detail": "Withdraw the proposed CRF addition. The checked specifications cover all required visits."
+    },
+    {
+      "outcome": "E2",
+      "actor": "controller",
+      "event": "read_requirement",
+      "protocol": {
+        "file": "protocol.md",
+        "line": 7,
+        "text": "- E2 | Fasting glucose | Week 24"
+      },
+      "sap": {
+        "file": "sap.md",
+        "line": 7,
+        "text": "- E2 | Fasting glucose | Week 24"
+      },
+      "aligned": true
+    },
+    {
+      "outcome": "E2",
+      "actor": "tool",
+      "event": "search_fields",
+      "file": "crf_fields.csv",
+      "available": true,
+      "citation": {
+        "file": "crf_fields.csv",
+        "line": 1,
+        "text": "field_id,measurement,visit,participant_key"
+      },
+      "matched_rows": [
+        {
+          "measurement": "Fasting plasma glucose",
+          "visit": "Baseline",
+          "field_id": "FPG_BASE",
+          "participant_key": "participant_id",
+          "source": {
+            "file": "crf_fields.csv",
+            "line": 2,
+            "text": "FPG_BASE | Fasting plasma glucose | Baseline | participant_id"
+          }
+        }
+      ]
+    },
+    {
+      "outcome": "E2",
+      "actor": "investigator",
+      "event": "initial_recommendation",
+      "detail": "Provisionally add a CRF field for Week 24 if no other source covers it."
+    },
+    {
+      "outcome": "E2",
+      "actor": "investigator",
+      "event": "decision",
+      "action": "inspect_lab",
+      "reason": "The CRF leaves visits uncovered. Check the lab specification before adding a field."
+    },
+    {
+      "outcome": "E2",
+      "actor": "tool",
+      "event": "search_fields",
+      "file": "lab_feed.csv",
+      "available": true,
+      "citation": {
+        "file": "lab_feed.csv",
+        "line": 1,
+        "text": "field_id,measurement,visit,participant_key"
+      },
+      "matched_rows": []
+    },
+    {
+      "outcome": "E2",
+      "actor": "reviewer",
+      "event": "verdict",
+      "round": 1,
+      "action": "accept",
+      "reason": "Submit the current evidence for the controller to verify."
+    },
+    {
+      "outcome": "E2",
+      "actor": "controller",
+      "event": "final_finding",
+      "status": "gap_in_supplied_specs",
+      "missing_visits": [
+        "Week 24"
+      ],
+      "detail": "Confirm how Fasting glucose will be collected at Week 24."
+    }
+  ]
+}

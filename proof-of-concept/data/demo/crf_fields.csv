@@ -1,0 +1,4 @@
+field_id,measurement,visit,participant_key
+FPG_BASE,Fasting plasma glucose,Baseline,participant_id
+WT_BASE,Body weight,Baseline,participant_id
+WT_24,Body weight,Week 24,participant_id
