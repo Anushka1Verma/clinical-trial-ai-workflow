@@ -1,0 +1,3 @@
+field_id,measurement,visit,participant_key
+LAB_A1C_BL,Glycated hemoglobin,Baseline,participant_id
+LAB_A1C_W24,Hemoglobin A1c,W24,participant_id
